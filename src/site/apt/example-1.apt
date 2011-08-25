@@ -1,0 +1,38 @@
+    ---
+    Composing Variant Configuration Data for Testing
+    ---
+    ---
+    2011-08-11
+
+    We need a couple of configuration files to run our tests, but they must be
+altered a bit to fit the test environment.
+
+---
+<plugin>
+  <artifactId>FileWeaver</artifactId>
+  <configuration>
+    <outputPath>testing/configuration</outputPath>
+    <properties>
+      <default.dbms.driver>mockDB</default.dbms.driver>
+      <default.log.directory>/dev/null</default.log.directory>
+    </properties>
+    <outputs>
+      <output>
+        <name>main.cfg</name>
+        <parts>
+          <part><path>src/main/config/main.cfg</path></part>
+          <part><text>debug = true</text></part>
+        </parts>
+        <properties>
+          <dryRun>true</dryRun>
+        </properties>
+      </output>
+      <output>
+        <outputPath>testing/configuration/modules</outputPath>
+        <name>fooblyAddon.cfg</name>
+        <parts><path>src/main/config/modules/fooblyAddon.cfg</path></parts>
+      </output>
+    </outputs>
+  </configuration>
+</plugin>
+---

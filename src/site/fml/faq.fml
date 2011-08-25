@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="question">
+      <question>Why did you write Yet Another Copy Plugin?</question>
+      <answer>
+        <p>
+          I needed to concatenate some overriding settings to a configuration
+          file, to make a version suitable for automated tests.  I could find
+          no plugin that would do this.  While I was at it, I threw in interpolation
+          of property values since it sounded handy.
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

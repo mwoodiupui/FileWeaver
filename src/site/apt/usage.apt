@@ -1,0 +1,86 @@
+    ---
+    Using FileWeaver
+    ---
+    ---
+    2010-08-10
+
+Weaving files
+
+    Files are assembled by the <<<weave>>> goal, which by
+default is bound to the <<<generate-sources>>> phase.  By default, output files
+are produced in the <<<$\{project.build.target\}>>> directory, but you can specify
+another with the <<<outputPath>>> element.
+
+    You can specify strings to be interpolated into the output by keywords using the
+<<<properties>>> element.  This will apply to all files produced under a given
+configuration of the plugin, unless overridden by the configuration for an
+individual file.
+
+* Files (<<<output>>> elements)
+
+    To produce output, configure one or more <<<output>>>
+elements.  Each <<<output>>> element represents one
+output file.  You must specify a <<<name>>> and a
+<<<parts>>> element.  You may specify an <<<outputPath>>>
+and a <<<properties>>> as well, or let these default from
+the overall plugin configuration.  The resulting file will be
+<<<outputPath/name>>>.
+
+    The list of <<<output>>> elements is enclosed in a single <<<outputs>>>
+element.
+
+** Concatenating parts into files (<<<part>>> elements)
+
+    The <<<parts>>> element contains a list of <<<part>>>
+elements, each of which specifies a source of text to be copied
+to the output file.  A <<<part>>> may contain a <<<text>>>
+or a <<<path>>> element, but not both.
+
+*** Literal parts (<<<text>>> elements)
+
+    A <<<text>>> element encloses literal text to be copied
+to the output.  Property references such as <<<$\{project.version\}>>>
+will be interpolated as usual.  By default the part will end with
+a newline, but you may suppress that by adding a <<<nonl>>>
+element to the enclosing <<<part>>>.
+
+*** Other files as parts (<<<path>>> elements)
+
+    A <<<path>>> element refers to a file path.  The designated
+file will be copied to the output.  Property references will be
+interpolated <<if they match keys in the plugin or file>>
+<<<properties>>> <<elements>>; project properties are
+not matched, but can be interpolated into <<<properties>>>
+to be passed through to the copy operation.
+
+An example
+
++--
+<plugin>
+  <artifactId>FileWeaver</artifactId>
+  <configuration>
+    <outputPath>testing/configuration</outputPath>
+    <properties>
+      <default.dbms.driver>mockDB</default.dbms.driver>
+      <default.log.directory>/dev/null</default.log.directory>
+    </properties>
+    <outputs>
+      <output>
+        <name>main.cfg</name>
+        <parts>
+          <part><path>src/main/config/main.cfg</path></part>
+          <part><text>debug = true</text></part>
+        </parts>
+        <properties>
+          <dryRun>true</dryRun>
+        </properties>
+      </output>
+      <output>
+        <outputPath>testing/configuration/modules</outputPath>
+        <name>fooblyAddon.cfg</name>
+        <parts><path>src/main/config/modules/fooblyAddon.cfg</path></parts>
+      </output>
+    </outputs>
+  </configuration>
+</plugin>
++--
