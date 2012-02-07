@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <!--
-   Copyright 2011 Indiana University
+   Copyright (C) 2011 Indiana University
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ xmlns="http://maven.apache.org/POM/4.0.0"
       with optional interpolation of token values.
     </description>
     <inceptionYear>2011</inceptionYear>
-    <url>https://johncock.ulib.iupui.edu/~mwood/maven-sites/FileWeaver</url>
+    <url>file:///dev/null</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -92,6 +92,10 @@ xmlns="http://maven.apache.org/POM/4.0.0"
                 </executions>
             </plugin>
             <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.0</version>
+            </plugin>
+            <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.1.2</version>
                   <executions>
@@ -111,6 +115,33 @@ xmlns="http://maven.apache.org/POM/4.0.0"
                         <phase>verify</phase>
                         <goals>
                             <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.9.0</version>
+                <configuration>
+                    <header>src/main/data/LICENSE_HEADER</header>
+                    <includes>
+                        <include>src/**</include>
+                        <include>pom.xml</include>
+                    </includes>
+                    <excludes>
+                        <exclude>src/main/data/LICENSE_HEADER</exclude>
+                    </excludes>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                    <encoding>UTF-8</encoding>
+                    <strictCheck>true</strictCheck>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check-headers</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -178,22 +209,9 @@ xmlns="http://maven.apache.org/POM/4.0.0"
     </scm>
 
     <issueManagement>
-        <system>Bugzilla</system>
-        <url>https://johncock.ulib.iupui.edu/bugzilla</url>
+        <!-- <system>none yet</system> -->
+        <url>file:///dev/null</url>
     </issueManagement>
-
-    <ciManagement>
-        <system>Jenkins</system>
-        <url>https://johncock.ulib.iupui.edu/hudson/job/FileWeaver%20maven%20plugin/</url>
-    </ciManagement>
-
-    <distributionManagement>
-        <site>
-            <id>mwood</id>
-            <name>Mark Wood's sites</name>
-            <url>scp://johncock.ulib.iupui.edu/home/mwood/public_html/maven-sites/FileWeaver</url>
-        </site>
-    </distributionManagement>
 
     <prerequisites>
         <maven>2.2</maven>
