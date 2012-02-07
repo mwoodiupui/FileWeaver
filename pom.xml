@@ -34,6 +34,7 @@ xmlns="http://maven.apache.org/POM/4.0.0"
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
     </properties>
 
     <parent>
@@ -107,19 +108,6 @@ xmlns="http://maven.apache.org/POM/4.0.0"
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.3</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
                 <version>1.9.0</version>
@@ -135,6 +123,9 @@ xmlns="http://maven.apache.org/POM/4.0.0"
                     <useDefaultExcludes>true</useDefaultExcludes>
                     <encoding>UTF-8</encoding>
                     <strictCheck>true</strictCheck>
+                    <properties>
+                        <year>${project.inceptionYear}-${maven.build.timestamp}</year>
+                    </properties>
                 </configuration>
                 <executions>
                     <execution>
@@ -148,6 +139,35 @@ xmlns="http://maven.apache.org/POM/4.0.0"
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.3</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
