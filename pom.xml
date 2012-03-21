@@ -30,7 +30,7 @@ xmlns="http://maven.apache.org/POM/4.0.0"
       with optional interpolation of token values.
     </description>
     <inceptionYear>2011</inceptionYear>
-    <url>file:///dev/null</url>
+    <url>http://mypage.iu.edu/~mwood/FileWeaver</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -223,14 +223,22 @@ xmlns="http://maven.apache.org/POM/4.0.0"
     </reporting>
     
     <scm>
-        <connection>scm:svn:http://scm.dspace.org/svn/repo/tools/maven/FileWeaver</connection>
-        <developerConnection>scm:svn:https://scm.dspace.org/svn/repo/tools/maven/FileWeaver</developerConnection>
-        <url>http://scm.dspace.org/svn/repo/tools/maven/FileWeaver</url>
+        <connection>scm:git:git://github.com/mwoodiupui/FileWeaver.git</connection>
+        <developerConnection>scm:git:git@github.com:mwoodiupui/FileWeaver.git</developerConnection>
+        <url>https://github.com/mwoodiupui/FileWeaver.git</url>
     </scm>
 
+    <distributionManagement>
+        <site>
+            <id>mypage</id>
+            <name>IU personal pages</name>
+            <url>scp://mercury.uits.indiana.edu/fs/mwood/www/FileWeaver/</url>
+        </site>
+    </distributionManagement>
+
     <issueManagement>
-        <!-- <system>none yet</system> -->
-        <url>file:///dev/null</url>
+        <system>GitHub</system>
+        <url>https://github.com/mwoodiupui/FileWeaver/issues</url>
     </issueManagement>
 
     <prerequisites>
