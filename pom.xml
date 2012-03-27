@@ -20,8 +20,8 @@ xmlns="http://maven.apache.org/POM/4.0.0"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>edu.iupui.ulib.maven</groupId>
-    <artifactId>FileWeaver</artifactId>
+    <groupId>edu.iu.ul.maven.plugins</groupId>
+    <artifactId>fileweaver</artifactId>
     <packaging>maven-plugin</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>FileWeaver</name>
@@ -232,7 +232,7 @@ xmlns="http://maven.apache.org/POM/4.0.0"
         <site>
             <id>mypage</id>
             <name>IU personal pages</name>
-            <url>scp://mercury.uits.indiana.edu/fs/mwood/www/FileWeaver/</url>
+            <url>scpexe://mercury.uits.indiana.edu/fs/mwood/www/FileWeaver/</url>
         </site>
     </distributionManagement>
 

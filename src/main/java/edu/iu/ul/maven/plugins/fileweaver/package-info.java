@@ -19,4 +19,4 @@
  * filtered during assembly, interpolating property values from various
  * sources.
  */
-package edu.iupui.ulib.maven.fileweaver;
+package edu.iu.ul.maven.plugins.fileweaver;
