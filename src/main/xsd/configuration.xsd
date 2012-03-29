@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema xmlns='http://www.w3.org/2001/XMLSchema'
+	xmlns:fw='http://www.ulib.iupui.edu/schema/maven/FileWeaver'
+	xmlns:jxb='http://java.sun.com/xml/ns/jaxb'
+	targetNamespace='http://www.ulib.iupui.edu/schema/maven/FileWeaver'
+	elementFormDefault='unqualified'
+	attributeFormDefault='unqualified'
+	jxb:version='2.0'>
+
+  <annotation>
+    <appinfo>
+      <jxb:schemaBindings>
+        <jxb:package name="edu.iu.ul.maven.plugins.FileWeaver.configuration"/>
+      </jxb:schemaBindings>
+    </appinfo>
+  </annotation>
+
+  <element name='weave' type='fw:weaveType'/>
+
+  <element name='output' type='fw:outputType'/>
+
+  <element name='parameter' type='fw:parameterType'/>
+
+  <complexType name='weaveType'>
+      <sequence>
+        <element ref='fw:output' maxOccurs='unbounded'/>
+        <element ref='fw:parameter'
+		 minOccurs='0'
+		 maxOccurs='unbounded'/>
+      </sequence>
+      <attribute name='outputPath' type='string'/>
+  </complexType>
+
+  <element name='part' type='fw:partType' abstract='true'/>
+
+  <element name='file' type='fw:filePartType' substitutionGroup='fw:part'>
+  </element>
+
+  <element name='text' type='fw:textPartType' substitutionGroup='fw:part'>
+  </element>
+
+  <complexType name='outputType'>
+    <sequence>
+      <element ref='fw:part'
+	       minOccurs='1'
+	       maxOccurs='unbounded'/>
+      <element ref='fw:parameter'
+	       minOccurs='0'
+	       maxOccurs='unbounded'/>
+    </sequence>
+    <attribute name='name' type='string' use='required'/>
+    <attribute name='outputPath' type='string'/>
+    <attribute name='encoding' type='NCName' use='required'/>
+  </complexType>
+
+  <complexType name='partType' mixed='true'/>
+
+  <complexType name='textPartType' mixed='true'>
+    <complexContent>
+      <extension base='fw:partType'/>
+    </complexContent>
+  </complexType>
+
+  <complexType name='filePartType' mixed='true'>
+    <complexContent>
+      <extension base='fw:partType'>
+        <attribute name='nonl' type='boolean' default='false'/>
+        <attribute name='encoding' type='NCName' use='required'/>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name='parameterType'>
+    <attribute name='name' type='NCName' use='required'/>
+    <attribute name='value' type='string' use='required'/>
+  </complexType>
+
+</schema>

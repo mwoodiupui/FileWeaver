@@ -15,10 +15,16 @@
  */
 package edu.iu.ul.maven.plugins.fileweaver;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
+import edu.iu.ul.maven.plugins.FileWeaver.configuration.WeaveType;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
@@ -56,9 +62,10 @@ public class Weave
     private Map<String, String> properties;
 
     /**
-     * Default constructor.
+     * External configuration document.
      */
-    public Weave() {}
+    private final URL configurationSource
+            = Weave.class.getResource("/weave.xml"); // FIXME debug
 
     @Override
     public void execute()
@@ -66,7 +73,7 @@ public class Weave
     {
         final Log log = getLog();
 
-        Map<String, Object> executionProps = new HashMap<String, Object>();
+        Map<String, Object> executionProps = new HashMap<>();
         if (null != properties)
             executionProps.putAll(properties);
 
@@ -77,5 +84,20 @@ public class Weave
             nFiles++;
         }
         log.info(String.format("%d files woven.", nFiles));
+    }
+
+    /**
+     * Read an XML configuration document and turn it into a tree of
+     * configuration objects.
+     * 
+     * @throws JAXBException 
+     */
+    void configure() throws JAXBException
+    {
+        JAXBContext context = JAXBContext.newInstance(WeaveType.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        JAXBElement woven = (JAXBElement) unmarshaller.unmarshal(configurationSource);
+        // FIXME does not match outputs = 
+        ((WeaveType)woven.getValue()).getOutput(); // FIXME debugging sample
     }
 }
