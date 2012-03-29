@@ -14,8 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
   -->
-<project 
-xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -68,9 +67,10 @@ xmlns="http://maven.apache.org/POM/4.0.0"
                     </execution>
                 </executions>
             </plugin>
+            <!--
             <plugin>
                 <artifactId>maven-docck-plugin</artifactId>
-                <version>1.0</version>
+                <version>1</version>
                 <executions>
                     <execution>
                         <id>check-plugin-documentation</id>
@@ -81,6 +81,7 @@ xmlns="http://maven.apache.org/POM/4.0.0"
                     </execution>
                 </executions>
             </plugin>
+            -->
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.8</version>
@@ -133,6 +134,19 @@ xmlns="http://maven.apache.org/POM/4.0.0"
                         <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <execution>
+                        <id>generate-config-code</id>
+                        <goals>
+                            <goal>xjc</goal>
                         </goals>
                     </execution>
                 </executions>

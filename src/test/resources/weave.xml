@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<weave  xmlns='http://www.ulib.iupui.edu/schema/maven/FileWeaver'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://www.ulib.iupui.edu/schema/maven/FileWeaver configuration.xsd'
+	outputPath='blop'>
+
+  <output name='foo' encoding='UTF-8'>
+    <text>this is text</text>
+    <file encoding='UTF-8'>baz</file>
+    <text>this is more text</text>
+    <parameter name='bar' value='quux'/>
+  </output>
+
+  <output name='buzz' encoding='UTF-8'>
+    <file encoding='UTF-8'>lightyear</file>
+  </output>
+
+  <parameter name='ecch' value='What, me worry?'/>
+
+</weave>
