@@ -20,7 +20,7 @@
     <groupId>edu.iu.ul.maven.plugins</groupId>
     <artifactId>fileweaver</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <name>FileWeaver</name>
     <description>
       A Maven plugin to assemble files from literal text and other files,
