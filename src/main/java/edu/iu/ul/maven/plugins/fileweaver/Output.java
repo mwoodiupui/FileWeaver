@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011-2012 Indiana University
+ * Copyright (C) 2011-2018 Indiana University
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.InterpolationFilterReader;
 
 /**
@@ -43,35 +44,33 @@ public class Output
 
     /**
      * Name of the output file.
-     * @parameter
-     * @required
      */
+    @Parameter(required=true)
     private String name;
 
     /**
      * Path to the file's directory.  Defaults to the plugin's output directory.
-     * @parameter
      */
+    @Parameter
     private File outputPath;
 
     /**
      * Properties for interpolation in this file only.
-     * @parameter
      */
+    @Parameter
     private Map<String, String> properties;
 
     /**
      * Sources from which to assemble the output.
-     * @parameter
-     * @required
      */
+    @Parameter(required=true)
     private List<Part> parts;
 
     /**
-     * @parameter default-value="${project.build.sourceEncoding}"
-     * @required
-     * @readonly
+     * Source encoding
      */
+    @Parameter(defaultValue="${project.build.sourceEncoding}",
+            required=true, readonly=true)
     private String encoding;
 
     /** output path after defaults are applied */
@@ -115,10 +114,10 @@ public class Output
      * @param log a logger, if needed.
      * @throws MojoExecutionException on I/O errors.
      */
-    void build(File defaultPath, Map<Object, Object> executionProps, Log log)
+    void build(File defaultPath, Map<String, Object> executionProps, Log log)
             throws MojoExecutionException
     {
-        Map<Object, Object> fileProps = new HashMap<Object, Object>();
+        Map<String, Object> fileProps = new HashMap<String, Object>();
         if (null != executionProps)
             fileProps.putAll(executionProps);
         if (null != properties)

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011-2012 Indiana University
+ * Copyright (C) 2011-2018 Indiana University
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,9 @@ import java.util.Map;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 /**
  * Build files from external and literal portions, with filtering.
@@ -29,32 +32,27 @@ import org.apache.maven.plugin.logging.Log;
  * Any number of output files may be generated.
  *
  * @author Mark H. Wood, IUPUI University Library
- *
- * @goal weave
- * 
- * @phase generate-sources
  */
+@Mojo (name="weave", defaultPhase=LifecyclePhase.GENERATE_SOURCES)
 public class Weave
     extends AbstractMojo
 {
     /**
      * Where to write files, unless a &lt;part&gt; specifies otherwise.
-     * @parameter expression="${project.build.directory}"
-     * @required
      */
+    @Parameter(property="project.build.directory", required=true)
     private java.io.File outputPath;
 
     /**
      * Files to be woven.
-     * @parameter
-     * @required
      */
+    @Parameter(required=true)
     private List<Output> outputs;
 
     /**
      * Common properties for filtering all outputs.
-     * @parameter
      */
+    @Parameter
     private Map<String, String> properties;
 
     @Override
@@ -63,7 +61,7 @@ public class Weave
     {
         final Log log = getLog();
 
-        Map<Object, Object> executionProps = new HashMap<Object, Object>();
+        Map<String, Object> executionProps = new HashMap<String, Object>();
         if (null != properties)
             executionProps.putAll(properties);
 
