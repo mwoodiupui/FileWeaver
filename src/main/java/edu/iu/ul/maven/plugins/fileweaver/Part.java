@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011-2018 Indiana University
+ * Copyright (C) 2011-2026 Indiana University
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,15 +33,25 @@ import org.apache.maven.plugin.MojoExecutionException;
 public class Part
 {
     /**
+     * Default constructor.
+     */
+    public Part() {}
+
+    /**
      * Text of a literal part.
      * @parameter
      */
     private String text;
 
+    /**
+     * Append some literal text to the template.
+     * @param text Text to be appended.
+     * @throws MojoExecutionException if path has been specified.
+     */
     public void setText(String text) throws MojoExecutionException
     {
         if (null != path)
-            throw new MojoExecutionException("Part cannot have text and path.");
+            throw new MojoExecutionException("Part cannot have both text and path.");
         else
             this.text = text;
     }
@@ -52,10 +62,15 @@ public class Part
      */
     private File path;
 
+    /**
+     * Append a file to the template.
+     * @param path the path to the file.
+     * @throws MojoExecutionException if text is also specified.
+     */
     public void setPath(File path) throws MojoExecutionException
     {
         if (null != text)
-            throw new MojoExecutionException("Part cannot have text and path.");
+            throw new MojoExecutionException("Part cannot have both text and path.");
         else
             this.path = path;
     }

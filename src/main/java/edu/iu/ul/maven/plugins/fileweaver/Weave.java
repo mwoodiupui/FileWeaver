@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011-2018 Indiana University
+ * Copyright (C) 2011-2026 Indiana University
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,11 @@ public class Weave
      */
     @Parameter
     private Map<String, String> properties;
+
+    /**
+     * Default constructor.
+     */
+    public Weave() {}
 
     @Override
     public void execute()

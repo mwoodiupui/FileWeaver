@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011-2018 Indiana University
+ * Copyright (C) 2011-2026 Indiana University
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,11 @@ import org.codehaus.plexus.util.InterpolationFilterReader;
 public class Output
 {
     private static final int BUFFER_SIZE = 256;
+
+    /**
+     * Default constructor.
+     */
+    public Output() {}
 
     /**
      * Name of the output file.
@@ -117,7 +122,7 @@ public class Output
     void build(File defaultPath, Map<String, Object> executionProps, Log log)
             throws MojoExecutionException
     {
-        Map<String, Object> fileProps = new HashMap<String, Object>();
+        Map<String, Object> fileProps = new HashMap<>();
         if (null != executionProps)
             fileProps.putAll(executionProps);
         if (null != properties)
