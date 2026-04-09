@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.iu.ul.maven.plugins.fileweaver;
 
 import junit.framework.TestCase;
@@ -53,6 +49,7 @@ public class WeaveTest
 
     /**
      * Test of configure method, of class Weave.
+     * @throws java.lang.Exception passed through.
      */
     public void testConfigure()
             throws Exception
